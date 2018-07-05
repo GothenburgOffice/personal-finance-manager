@@ -1,0 +1,28 @@
+{
+  "name": "finance",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-scripts": "1.1.4"
+  },
+  "scripts": {
+    "build-css": "node-sass-chokidar ./src/styles/sass/ -o ./src/styles/css/ --output-style expanded --source-map true",
+    "watch-css": "npm run build-css && node-sass-chokidar ./src/styles/sass/ -o ./src/styles/css/ --watch --recursive --output-style expanded --source-map true",
+    "build-css-prod": "node-sass-chokidar ./src/styles/sass/ -o ./src/styles/css/ --output-style compressed -x",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css-prod build-js",
+    "test": "react-scripts test --env=jsdom",
+    "deploy": "run-s deploy-deploy deploy-login",
+    "deploy-deploy": "firebase login",
+    "deploy-login": "firebase deploy",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "node-sass-chokidar": "^1.2.2",
+    "npm-run-all": "^4.1.2"
+  }
+}
