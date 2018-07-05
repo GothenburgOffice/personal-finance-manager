@@ -1,6 +1,10 @@
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
+    ".read":  "root.child('admin/' + auth.uid).exists()",
+    ".write": "root.child('admin/' + auth.uid).exists()",
+    "admin": {
+      ".write": "false",
+      ".read": "auth != null"
+    }
   }
 }
