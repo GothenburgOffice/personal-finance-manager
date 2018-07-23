@@ -1,8 +1,30 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { ConnectedRouter } from 'connected-react-router'
+import { Route } from 'react-router'
+import store, { history } from './store'
+import registerServiceWorker from './registerServiceWorker'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import MyLoadable from './components/loader/myloadable'
+
+import '../node_modules/normalize.css/normalize.css'
+import './styles/css/index.css'
+
+const target = document.querySelector('#root')
+
+const App = MyLoadable({
+  loader: () => import('./App')
+})
+
+render(
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <div>
+        <Route component={App} />
+      </div>
+    </ConnectedRouter>
+  </Provider>,
+  target
+)
 registerServiceWorker();
